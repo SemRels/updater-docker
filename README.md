@@ -1,6 +1,6 @@
 # updater-docker
 
-[![Latest Release](https://img.shields.io/github/v/release/SemRels/updater-docker?label=version\&color=blue)](https://github.com/SemRels/updater-docker/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/SemRels/updater-docker?label=version&color=blue)](https://github.com/SemRels/updater-docker/releases/latest)
 
 Updates a version argument in a Dockerfile.
 
