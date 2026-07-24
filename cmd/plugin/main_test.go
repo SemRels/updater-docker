@@ -15,7 +15,7 @@ func TestRunUpdatesDockerfile(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.RemoveAll(dir)
+	defer func() { _ = os.RemoveAll(dir) }()
 
 	file := filepath.Join(dir, "Dockerfile")
 	if err := os.WriteFile(file, []byte("FROM alpine:3.19\n"), 0o644); err != nil {
