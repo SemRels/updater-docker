@@ -14,7 +14,7 @@ func TestUpdaterUpdateMatchingImage(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.RemoveAll(dir)
+	defer func() { _ = os.RemoveAll(dir) }()
 
 	file := filepath.Join(dir, "Dockerfile")
 	original := "FROM ghcr.io/semrels/app:1.2.3\nRUN echo hi\n"

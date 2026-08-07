@@ -25,7 +25,7 @@ func run(stdout, stderr io.Writer, getenv func(string) string) int {
 		version = getenv("SEMREL_NEXT_VERSION")
 	}
 	if version == "" {
-		fmt.Fprintln(stderr, "updater-docker: SEMREL_VERSION is required")
+		_, _ = fmt.Fprintln(stderr, "updater-docker: SEMREL_VERSION is required")
 		return 1
 	}
 	version = strings.TrimPrefix(version, "v")
@@ -38,15 +38,15 @@ func run(stdout, stderr io.Writer, getenv func(string) string) int {
 	registry := getenv("SEMREL_PLUGIN_REGISTRY")
 
 	if getenv("SEMREL_DRY_RUN") == "true" {
-		fmt.Fprintf(stdout, "updater-docker: [dry-run] would update %s to version %s\n", file, version)
+		_, _ = fmt.Fprintf(stdout, "updater-docker: [dry-run] would update %s to version %s\n", file, version)
 		return 0
 	}
 
 	if err := plugin.NewUpdater().Update(file, image, registry, version); err != nil {
-		fmt.Fprintln(stderr, "updater-docker:", err)
+		_, _ = fmt.Fprintln(stderr, "updater-docker:", err)
 		return 1
 	}
 
-	fmt.Fprintf(stdout, "updater-docker: updated %s to version %s\n", file, version)
+	_, _ = fmt.Fprintf(stdout, "updater-docker: updated %s to version %s\n", file, version)
 	return 0
 }
