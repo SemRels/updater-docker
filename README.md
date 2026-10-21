@@ -39,19 +39,21 @@ cosign verify ghcr.io/semrels/updater-docker:latest \
 
 ```yaml
 plugins:
-  - name: updater-docker
-    path: ~/.semrel/plugins/semrel-plugin-updater-docker
-    env:
-      SEMREL_PLUGIN_FILE: "Dockerfile"
-      SEMREL_PLUGIN_ARG_NAME: "VERSION"
+  - uses: "@semrel/updater-docker"
+    phase: pre-tag
+    args:
+      file: "Dockerfile"
+      arg_name: "VERSION"
 ```
 
-## `SEMREL_PLUGIN_*` variables
+## Options
 
-| Name | Required | Description | Default |
-| --- | --- | --- | --- |
-| `SEMREL_PLUGIN_FILE` | Optional | Path to the Dockerfile to update. | Dockerfile |
-| `SEMREL_PLUGIN_ARG_NAME` | Optional | Docker build argument name that stores the version. | VERSION |
+Every option can be set as an entry under `args` in `.semrel.yaml`. semrel passes each entry to the plugin as the environment variable shown in the table, so you can also set that variable directly (for example in your CI environment) instead of using `args`.
+
+| Argument | Environment variable | Required | Description | Default |
+| --- | --- | --- | --- | --- |
+| `file` | `SEMREL_PLUGIN_FILE` | Optional | Path to the Dockerfile to update. | Dockerfile |
+| `arg_name` | `SEMREL_PLUGIN_ARG_NAME` | Optional | Docker build argument name that stores the version. | VERSION |
 
 ## `SEMREL_*` release context used
 
