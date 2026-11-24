@@ -38,7 +38,7 @@ func run(stdout, stderr io.Writer, getenv func(string) string) int {
 	image := getenv("SEMREL_PLUGIN_IMAGE")
 	registry := getenv("SEMREL_PLUGIN_REGISTRY")
 
-	if getenv("SEMREL_DRY_RUN") == "true" || getenv("SEMREL_PLUGIN_DRY_RUN") == "true" {
+	if getenv("SEMREL_DRY_RUN") == "true" || getenv("SEMREL_DRY_RUN") == "1" || getenv("SEMREL_PLUGIN_DRY_RUN") == "true" {
 		diff, err := plugin.NewUpdater().Preview(file, image, registry, version)
 		if err != nil {
 			_, _ = fmt.Fprintln(stderr, "updater-docker:", err)
